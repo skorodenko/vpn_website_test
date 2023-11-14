@@ -7,6 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+flask = "^3.0.0"
+requests = "^2.31.0"
+flask-sqlalchemy = "^3.1.1"
+flask-login = "^0.6.3"
+flask-bcrypt = "^1.0.1"
+psycopg2-binary = "^2.9.9"
+wtforms = "^3.1.1"
 
 
 [build-system]

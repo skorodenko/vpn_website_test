@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold text-body-emphasis">Welcome to WebVPN</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">
+            Use this site as 'vpn'.
+            Have access to usage statistics.
+            Use multiple accounts.
+        </p>
+        <p class="lead mb-4">
+            {% if current_user.is_authenticated %}
+            You are authenticated. Hello {{ current_user.username }}
+            {% else %}
+            You are not authenticated. To proceed please login (register).
+            {% endif %}
+        </p>
+        {% if current_user.is_authenticated %}
+        <p>Use 'Account' page to edit profile data</p>
+        <p>Use 'Dashboard' page to view statistics on 'vpn' usage</p>
+        <p>Use 'Websites' page to add/view sites through 'vpn'</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
