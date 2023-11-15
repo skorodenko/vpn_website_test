@@ -3,19 +3,19 @@
 {% block content %}
 <form method="POST" action="" novalidate>
     <h1 class="h3 mb-3 fw-normal">Please register</h1>
-    <div class="form-floating">
+    <div class="form-floating mb-4">
         {{ register_form.username(class_="form-control", placeholder="Username") }}
         <label>Username</label>
     </div>
-    <div class="form-floating">
+    <div class="form-floating mb-4">
         {{ register_form.password(class_="form-control", placeholder="Password") }}
         <label>Password</label>
     </div>
-    <div class="form-floating">
+    <div class="form-floating mb-4">
         {{ register_form.confirm_password(class_="form-control", placeholder="Confirm password") }}
         <label>Confirm password</label>
     </div>
-    <input type="submit" class="btn btn-primary" value="Register"/>
+    <input type="submit" class="btn btn-primary mb-4" value="Register"/>
     <a href="{{ url_for('root.auth.login') }}">Already have an account? Login</a>
 </form>
 {% endblock %}

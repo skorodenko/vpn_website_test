@@ -23,16 +23,18 @@
                         <a href="#dashboard" class="nav-link {{'active' if active_page == 'dashboard'}}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#websites" class="nav-link {{'active' if active_page == 'websites'}}">Websites</a>
+                        <a href="{{ url_for('root.main.websites') }}" class="nav-link {{'active' if active_page == 'websites'}}">Websites</a>
                     </li>
                     {% endif %}
                 </ul>
                 {% if current_user.is_authenticated %}
-                    <form method="POST">
-                        <input type="submit" class="btn btn-sm btn-outline-secondary" value="Logout"/>
+                    <form method="POST" action="{{ url_for('root.auth.logout') }}">
+                        <input type="submit" class="btn btn-outline-secondary" value="Logout"/>
                     </form>
                 {% else %}
-                    <a href="{{ url_for('root.auth.login') }}" class="ms-auto link-light">Login</a>
+                    <form action="{{ url_for('root.auth.login') }}">
+                        <input type="submit" class="btn btn-outline-primary" value="Login"/>
+                    </form>
                 {% endif %}
             </div>
         </div>

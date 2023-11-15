@@ -1,5 +1,5 @@
 from wtforms import Form, StringField, PasswordField, BooleanField
-from wtforms.validators import DataRequired, Length, EqualTo
+from wtforms.validators import DataRequired, Length, EqualTo, URL
 
 
 class RegisterForm(Form):
@@ -18,3 +18,7 @@ class LoginForm(Form):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField("Remember Me")
+    
+    
+class WebsitesAdd(Form):
+    url = StringField("Url", validators=[DataRequired(), URL()])
