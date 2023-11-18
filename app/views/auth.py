@@ -1,9 +1,9 @@
 from uuid import UUID
 from app.models import User
 from app import db, login_manager, bcrypt
-from app.forms import LoginForm, RegisterForm
-from flask import Blueprint, render_template, redirect, url_for, request
-from flask_login import login_user, logout_user, login_required
+from app.forms import LoginForm, RegisterForm, EditUser
+from flask import Blueprint, render_template, redirect, url_for, request, abort
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 bp_auth = Blueprint("auth", __name__, url_prefix="/auth")
@@ -23,7 +23,8 @@ def register():
             .decode("utf-8")
             
         user = User(username = form.username.data,
-                    password = hashed_password)        
+                    password = hashed_password,
+                    description = form.description.data)        
         
         db.session.add(user)
         db.session.commit()        
@@ -33,6 +34,27 @@ def register():
     return render_template(
         "views/auth/register.html",
         register_form = form
+    )
+    
+
+@bp_auth.route("/account", methods = ["GET", "POST"])
+@login_required
+def account():
+    user = current_user
+    if not user:
+        return abort(404)
+    
+    form = EditUser(request.form)
+    
+    if request.method == "POST" and form.validate():
+        if form.description.data:
+            user.description = form.description.data
+        db.session.commit()
+    
+    return render_template(
+        "views/auth/account.html",
+        user = user,
+        form = form,
     )
 
 

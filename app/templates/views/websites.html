@@ -13,6 +13,7 @@
 <table class="table">
     <thead class="table-dark">
         <tr>
+            <th scope="col">Name</th>
             <th scope="col">Url</th>
             <th scope="col">Actions</th>
         </tr>
@@ -20,13 +21,13 @@
     <tbody>
         {% for website in tdata %}
         <tr>
+            <td>{{ website.name }}</td>
             <td>{{ website.url }}</td>
             <td>
                 <div class="row">
-                    <form class="col-auto">
-                        <button type="submit" class="btn btn-outline-primary">Go</button>
-                    </form>
-                    <form class="col-auto" method="POST" action="{{ url_for('root.main.websites_delete', id=website.id) }}">
+                    <a class="col-auto btn btn-outline-primary" href="{{ url_for('root.main.vpn', url = website.url) }}">Go</a>
+                    <form class="col-auto" method="POST"
+                        action="{{ url_for('root.main.websites_delete', id=website.id) }}">
                         <button type="submit" class="btn btn-outline-danger">Delete</button>
                     </form>
                 </div>
@@ -41,12 +42,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Fill data to add website</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add website</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ url_for('root.main.websites_add') }}">
-                    <div class="form-floating mb-4">
+                <div class="row mb-4">
+                    <p>Omit protocol when entering url ('http(s)://')</p>
+                    <p>Example: https://www.google.com -> www.google.com</p>
+                </div>
+                <form class="row mb-4" method="POST" action="{{ url_for('root.main.websites_add') }}">
+                    <div class="form-floating mb-2">
+                        {{ add_form.name(class_="form-control", placeholder="Name") }}
+                        <label>Name</label>
+                    </div>
+                    <div class="form-floating mb-2">
                         {{ add_form.url(class_="form-control", placeholder="Url") }}
                         <label>Url</label>
                     </div>

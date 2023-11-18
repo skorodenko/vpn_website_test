@@ -15,6 +15,10 @@
         {{ register_form.confirm_password(class_="form-control", placeholder="Confirm password") }}
         <label>Confirm password</label>
     </div>
+    <div class="form-floating mb-4">
+        {{ register_form.description(class_="form-control", placeholder="Description") }}
+        <label>Description</label>
+    </div>
     <input type="submit" class="btn btn-primary mb-4" value="Register"/>
     <a href="{{ url_for('root.auth.login') }}">Already have an account? Login</a>
 </form>
