@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-between mb-2">
+    <div class="col-auto me-auto">
+        <h2>VPN Usage</h2>
+    </div>
+</div>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Url</th>
+            <th scope="col">Number of req + resp</th>
+            <th scope="col">Downloaded (bytes)</th>
+            <th scope="col">Uploaded (bytes)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tracker in tdata %}
+        <tr>
+            <td>{{ tracker.name }}</td>
+            <td>{{ tracker.url }}</td>
+            <td>{{ tracker.rrcount }}</td>
+            <td>{{ tracker.downloaded }}</td>
+            <td>{{ tracker.uploaded }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

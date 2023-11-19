@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="row h3 mb-3 fw-normal">User account</h1>
+<label class="row mb-4">Username: {{ user.username }}</label>
+<label class="row mb-4">Description: {{ user.description }}</label>
+
+<button type="button" class="row btn btn-info" data-bs-toggle="modal" data-bs-target="#editAccount">
+    Edit user
+</button>
+
+<div class="modal fade" id="editAccount" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit some account data</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row mb-4" method="POST">
+                    <div class="form-floating mb-2">
+                        {{ form.description(class_="form-control", placeholder="Description") }}
+                        <label class="form-label">Description</label>
+                    </div>
+                    <input type="submit" class="btn btn-primary mb-4" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

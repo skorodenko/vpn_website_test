@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="row justify-content-between mb-2">
+    <div class="col-auto me-auto">
+        <h2>VPN Websites</h2>
+    </div>
+    <button type="button" class="btn btn-info col-auto" data-bs-toggle="modal" data-bs-target="#addWebsite">
+        Add website
+    </button>
+</div>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Url</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for website in tdata %}
+        <tr>
+            <td>{{ website.name }}</td>
+            <td>{{ website.url }}</td>
+            <td>
+                <div class="row">
+                    <a class="col-auto btn btn-outline-primary" href="{{ url_for('root.main.vpn', url = website.url) }}">Go</a>
+                    <form class="col-auto" method="POST"
+                        action="{{ url_for('root.main.websites_delete', id=website.id) }}">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="addWebsite" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add website</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-4">
+                    <p>Omit protocol when entering url ('http(s)://')</p>
+                    <p>Example: https://www.google.com -> www.google.com</p>
+                </div>
+                <form class="row mb-4" method="POST" action="{{ url_for('root.main.websites_add') }}">
+                    <div class="form-floating mb-2">
+                        {{ add_form.name(class_="form-control", placeholder="Name") }}
+                        <label>Name</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        {{ add_form.url(class_="form-control", placeholder="Url") }}
+                        <label>Url</label>
+                    </div>
+                    <input type="submit" class="btn btn-primary mb-4" value="Add website" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
